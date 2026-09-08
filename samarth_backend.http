@@ -1,0 +1,6 @@
+@samarth_backend_HostAddress = http://localhost:5083
+
+GET {{samarth_backend_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
