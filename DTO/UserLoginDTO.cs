@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace samarth_backend.DTO
 {
@@ -18,12 +18,10 @@ namespace samarth_backend.DTO
 
     public class UserDTO
     {
-        public string? Username { get; set; }
+        public string? Name { get; set; }
         public string? MobileNo { get; set; }
         public string? Password { get; set; }
         public string? DesignationId { get; set; }
         public int? DistrictCode { get; set; }
-        public byte[]? PasswordHash { get; set; }
-        public byte[]? PasswordSalt { get; set; }
     }
 }

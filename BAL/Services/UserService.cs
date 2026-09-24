@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using samarth_backend.BAL.Interfaces;
 using samarth_backend.DAL;
@@ -30,35 +30,17 @@ namespace samarth_backend.BAL.Services
             {
                 return false;
             }
-            byte[] passwordHash, passwordSalt;
-            PasswordHasher(dto.Password, out passwordHash, out passwordSalt);
-            int updatePassword = await _dbContext.Users.Where(u => u.MobileNo == dto.MobileNo).ExecuteUpdateAsync(setters => setters.SetProperty(u => u.PasswordHash, passwordHash).SetProperty(u => u.PasswordSalt, passwordSalt));
+            string passwordHash = BCrypt.Net.BCrypt.HashPassword(dto.Password);
+            int updatePassword = await _dbContext.Users.Where(u => u.MobileNo == dto.MobileNo).ExecuteUpdateAsync(setters => setters.SetProperty(u => u.Password, passwordHash));
             return true;
         }
-        public bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
+        public bool VerifyPasswordHash(string password, string passwordHash)
         {
-            if (passwordHash == null || passwordSalt == null || string.IsNullOrEmpty(password))
+            if (string.IsNullOrEmpty(passwordHash) || string.IsNullOrEmpty(password))
             {
                 return false;
             }
-            using (var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt))
-            {
-                var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
-                for (int i = 0; i < computedHash.Length; i++)
-                {
-                    if (computedHash[i] != passwordHash[i])
-                        return false;
-                }
-            }
-            return true;
-        }
-        private void PasswordHasher(string password, out byte[] passwordHash, out byte[] passwordSalt)
-        {
-            using (var hmac = new System.Security.Cryptography.HMACSHA512())
-            {
-                passwordSalt = hmac.Key;
-                passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
-            }
+            return BCrypt.Net.BCrypt.Verify(password, passwordHash);
         }
     }
 }

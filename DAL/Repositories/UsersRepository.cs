@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using samarth_backend.DAL.Entities;
 using samarth_backend.DAL.Interfaces;
 using samarth_backend.DTO;
@@ -17,17 +17,12 @@ namespace samarth_backend.DAL.Repositories
         public async Task<UserDTO> GetUsersByMobileNoAsync(string mobile_no)
         {
             var getUser = await (from u in _dbContext.Users
-                                 join da in _dbContext.DutyAssignements on u.Id equals da.UserId
                                  where u.MobileNo == mobile_no
                                  select new UserDTO
                                  {
-                                     Username = u.Username,
+                                     Name = u.Name,
                                      MobileNo = u.MobileNo,
                                      Password = u.Password,
-                                     DesignationId = u.DesignationId,
-                                     DistrictCode = da.DistrictCode,
-                                     PasswordHash = u.PasswordHash,
-                                     PasswordSalt = u.PasswordSalt
 
                                  }).FirstOrDefaultAsync();
             return getUser;
