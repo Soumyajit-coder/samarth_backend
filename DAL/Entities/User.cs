@@ -1,33 +1,35 @@
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace samarth_backend.DAL.Entities;
 
 [Table("users")]
+[Index("Email", Name = "users_email_index")]
+[Index("Id", Name = "users_id_index")]
+[Index("MobileNo", Name = "users_mobile_no_index")]
 public partial class User
 {
     [Key]
     [Column("id")]
     public long Id { get; set; }
 
-    [Required]
     [Column("name")]
     [StringLength(255)]
-    public string Name { get; set; }
+    public string Name { get; set; } = null!;
 
-    [Required]
     [Column("email")]
     [StringLength(255)]
-    public string Email { get; set; }
+    public string Email { get; set; } = null!;
 
     [Column("email_verified_at", TypeName = "timestamp(0) without time zone")]
     public DateTime? EmailVerifiedAt { get; set; }
 
-    [Required]
     [Column("password")]
     [StringLength(255)]
-    public string Password { get; set; }
+    public string Password { get; set; } = null!;
 
     [Column("remember_token")]
     [StringLength(100)]
@@ -39,10 +41,9 @@ public partial class User
     [Column("updated_at", TypeName = "timestamp(0) without time zone")]
     public DateTime? UpdatedAt { get; set; }
 
-    [Required]
     [Column("mobile_no")]
     [StringLength(10)]
-    public string MobileNo { get; set; }
+    public string MobileNo { get; set; } = null!;
 
     [Column("flag_sent_otp")]
     public short FlagSentOtp { get; set; }
@@ -85,4 +86,16 @@ public partial class User
     [Column("designation")]
     [StringLength(255)]
     public string? Designation { get; set; }
+
+    [InverseProperty("User")]
+    public virtual ICollection<AcceptRejectInfo> AcceptRejectInfos { get; set; } = new List<AcceptRejectInfo>();
+
+    [InverseProperty("User")]
+    public virtual ICollection<PasswordHistory> PasswordHistories { get; set; } = new List<PasswordHistory>();
+
+    [InverseProperty("User")]
+    public virtual ICollection<UserPersonal> UserPersonals { get; set; } = new List<UserPersonal>();
+
+    [InverseProperty("User")]
+    public virtual ICollection<UserRoleSchemeOfficeMapping> UserRoleSchemeOfficeMappings { get; set; } = new List<UserRoleSchemeOfficeMapping>();
 }

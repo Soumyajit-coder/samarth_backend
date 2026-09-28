@@ -44,11 +44,13 @@ builder.Services.AddMemoryCache();
 // Repository Registration
 builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddTransient<IUsersRepository, UsersRepository>();
+builder.Services.AddTransient<IDutyManagementRepository, DutyManagementRepository>();
 
 // Service Registration
 builder.Services.AddTransient<IUsersService, UserService>();
 builder.Services.AddTransient<ICaptchaService, CaptchaService>();
 builder.Services.AddTransient<IOtpService, OtpService>();
+builder.Services.AddTransient<IDutyManagementService, DutyManagementService>();
 // AutoMapper
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
