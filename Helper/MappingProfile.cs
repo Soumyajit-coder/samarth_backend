@@ -19,6 +19,13 @@ namespace samarth_backend.Helper
                 opt.MapFrom(src => src.IsActive == "Active" ? 1 : 0));
             CreateMap<Permission, AddPermissionDTO>().ReverseMap();
             CreateMap<Permission, updatePermissionDTO>().ReverseMap();
+            CreateMap<Role, RoleMgmtListDTO>().ForMember(dest => dest.IsActive, opt =>
+                opt.MapFrom(src => src.IsActive == 1 ? "Active" : "Inactive"))
+            .ReverseMap()
+            .ForMember(dest => dest.IsActive, opt =>
+                opt.MapFrom(src => src.IsActive == "Active" ? 1 : 0));
+            CreateMap<Role, RoleMgmtDTO>().ReverseMap();
+            CreateMap<Role, UpdateRoleDetailsDTO>().ReverseMap();
         }
     }
 }

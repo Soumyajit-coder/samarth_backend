@@ -31,6 +31,9 @@ public partial class Role
     [Column("rank")]
     public short? Rank { get; set; }
 
+    [Column("is_active")]
+    public short? IsActive { get; set; }
+
     [InverseProperty("Role")]
     public virtual ICollection<ModelHasRole> ModelHasRoles { get; set; } = new List<ModelHasRole>();
 

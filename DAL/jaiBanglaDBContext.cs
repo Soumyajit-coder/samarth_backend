@@ -6805,6 +6805,8 @@ public partial class jaiBanglaDBContext : DbContext
         modelBuilder.Entity<Role>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("roles_pkey");
+
+            entity.Property(e => e.IsActive).HasDefaultValue((short)0);
         });
 
         modelBuilder.Entity<RoleOfficeTypeMapping>(entity =>
