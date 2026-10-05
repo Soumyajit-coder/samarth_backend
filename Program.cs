@@ -46,6 +46,7 @@ builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddTransient<IUsersRepository, UsersRepository>();
 builder.Services.AddTransient<IDutyManagementRepository, DutyManagementRepository>();
 builder.Services.AddTransient<IRoleMgmtRepository, RoleMgmtRepository>();
+builder.Services.AddTransient<ISchemeMgmtRepository, SchemeMgmtRepository>();
 
 // Service Registration
 builder.Services.AddTransient<IUsersService, UserService>();
@@ -53,6 +54,7 @@ builder.Services.AddTransient<ICaptchaService, CaptchaService>();
 builder.Services.AddTransient<IOtpService, OtpService>();
 builder.Services.AddTransient<IDutyManagementService, DutyManagementService>();
 builder.Services.AddTransient<IRoleMgmtService, RoleMgmtService>();
+builder.Services.AddTransient<ISchemeMgmtService, SchemeMgmtService>();
 // AutoMapper
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
