@@ -10,12 +10,12 @@ namespace samarth_backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DutyManagementController : ControllerBase
+    public class PermissionManagementController : ControllerBase
     {
         private readonly IDutyManagementService _dutyManagementService;
         private APIResponse _apiResponse;
 
-        public DutyManagementController(IDutyManagementService dutyManagementService)
+        public PermissionManagementController(IDutyManagementService dutyManagementService)
         {
             _dutyManagementService = dutyManagementService;
             _apiResponse = new();
