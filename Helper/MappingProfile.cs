@@ -28,6 +28,14 @@ namespace samarth_backend.Helper
             CreateMap<Role, UpdateRoleDetailsDTO>().ReverseMap();
             CreateMap<Scheme, SchemeMgmtDTO>().ReverseMap();
             CreateMap<Scheme, updateSchemeDTO>().ReverseMap();
+            //******* LGD Mapping ********//
+            CreateMap<District, DistrictDTO>().ReverseMap();
+            CreateMap<Block, BlockDTO>().ReverseMap();
+            CreateMap<Ward, WardDTO>().ReverseMap();
+            CreateMap<Panchayat, PanchayatDTO>().ReverseMap();
+            CreateMap<Subdivision, SubDivisionDTO>().ReverseMap();
+            CreateMap<Municipality, MunicipalityDTO>().ReverseMap();
+            //******* LGD Mapping ********//
         }
     }
 }

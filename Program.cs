@@ -47,6 +47,7 @@ builder.Services.AddTransient<IUsersRepository, UsersRepository>();
 builder.Services.AddTransient<IDutyManagementRepository, DutyManagementRepository>();
 builder.Services.AddTransient<IRoleMgmtRepository, RoleMgmtRepository>();
 builder.Services.AddTransient<ISchemeMgmtRepository, SchemeMgmtRepository>();
+builder.Services.AddTransient<ILGDRepository, LGDRepository>();
 
 // Service Registration
 builder.Services.AddTransient<IUsersService, UserService>();
@@ -55,6 +56,7 @@ builder.Services.AddTransient<IOtpService, OtpService>();
 builder.Services.AddTransient<IDutyManagementService, DutyManagementService>();
 builder.Services.AddTransient<IRoleMgmtService, RoleMgmtService>();
 builder.Services.AddTransient<ISchemeMgmtService, SchemeMgmtService>();
+builder.Services.AddTransient<ILGDListService, LGDListService>();
 // AutoMapper
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
