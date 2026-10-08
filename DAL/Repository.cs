@@ -42,5 +42,9 @@ namespace samarth_backend.DAL
             await _dbContext.SaveChangesAsync();
             return entity;
         }
+        public async Task<long> GetMaxAsync(Expression<Func<T, long?>> selector)
+        {
+            return await _dbContext.Set<T>().MaxAsync(selector) ?? 0;
+        }
     }
 }

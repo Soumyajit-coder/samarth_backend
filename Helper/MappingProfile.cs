@@ -36,6 +36,13 @@ namespace samarth_backend.Helper
             CreateMap<Subdivision, SubDivisionDTO>().ReverseMap();
             CreateMap<Municipality, MunicipalityDTO>().ReverseMap();
             //******* LGD Mapping ********//
+            CreateMap<OfficeMaster, OfficeMasterDTO>().ForMember(dest => dest.IsActive, opt =>
+                opt.MapFrom(src => src.IsActive == 1 ? "Active" : "Inactive"))
+            .ReverseMap()
+            .ForMember(dest => dest.IsActive, opt =>
+                opt.MapFrom(src => src.IsActive == "Active" ? 1 : 0));
+            CreateMap<OfficeMaster, AddOfficeMasterDTO>().ReverseMap();
+            CreateMap<OfficeMaster, updateOfficeMasterDTO>().ReverseMap();
         }
     }
 }
